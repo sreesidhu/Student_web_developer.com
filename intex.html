@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>₹500 Website | Student Developer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      overflow-x: hidden;
+      color: white;
+      min-height: 100vh;
+      background: #000;
+    }
+
+    /* === Unimaginable Background Magic === */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 20%, #ff0080, transparent 30%),
+                  radial-gradient(circle at 80% 30%, #00d9ff, transparent 30%),
+                  radial-gradient(circle at 50% 80%, #ff9900, transparent 40%);
+      filter: blur(100px);
+      animation: pulse 8s infinite alternate ease-in-out;
+      z-index: -3;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+      100% { transform: scale(1.3) rotate(45deg); opacity: 1; }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+    }
+
+    .wave {
+      position: fixed;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background: repeating-radial-gradient(circle, rgba(255,255,255,0.05) 0 1px, transparent 1px 100%);
+      animation: rotateWave 30s linear infinite;
+      z-index: -1;
+      mix-blend-mode: overlay;
+    }
+
+    @keyframes rotateWave {
+      from { transform: rotate(0deg) scale(1); }
+      to { transform: rotate(360deg) scale(1.2); }
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      background: linear-gradient(90deg, #00ffe0, #ff00c8, #00c3ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: hueShift 3s infinite linear, textGlow 4s infinite alternate;
+    }
+
+    @keyframes hueShift {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    @keyframes textGlow {
+      from { text-shadow: 0 0 10px #00fff2, 0 0 20px #ff00c8; }
+      to { text-shadow: 0 0 30px #ff00c8, 0 0 60px #00ffe0; }
+    }
+
+    header p {
+      color: #ccc;
+      margin-top: 15px;
+      letter-spacing: 1px;
+      animation: fadeInUp 2s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #00ffe0, #ff00c8);
+      border: none;
+      color: white;
+      padding: 14px 35px;
+      margin-top: 30px;
+      border-radius: 40px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 25px #ff00c8;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.3);
+      transition: 0.4s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px #00ffe0;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 50px 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 25px;
+      width: 270px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(255,255,255,0.05);
+      position: relative;
+      overflow: hidden;
+      animation: floaty 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes floaty {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-15px); }
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(60deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: skewX(-30deg);
+      animation: shimmer 4s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -50%; }
+      100% { left: 150%; }
+    }
+
+    /* === CONTACT SECTION === */
+    .contact {
+      text-align: center;
+      padding: 60px 20px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      margin: 40px;
+      border-radius: 25px;
+      box-shadow: 0 0 30px rgba(255,255,255,0.1);
+    }
+
+    .contact h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #fff;
+      animation: textGlow 4s infinite alternate;
+    }
+
+    .contact p {
+      color: #ccc;
+      margin: 10px 0;
+      font-size: 1rem;
+    }
+
+    .contact a {
+      color: #00fff2;
+      text-decoration: none;
+    }
+
+    .payment-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 15px;
+      display: inline-block;
+      padding: 20px 40px;
+      margin-top: 20px;
+      box-shadow: 0 0 20px rgba(0,255,255,0.3);
+      animation: glowPulse 4s infinite alternate;
+    }
+
+    @keyframes glowPulse {
+      from { box-shadow: 0 0 20px #ff00c8; }
+      to { box-shadow: 0 0 50px #00ffe0; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #ccc;
+      font-size: 0.9rem;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      .features { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+  <div class="wave"></div>
+
+  <header>
+    <h1>Get Your Professional Website for Just ₹500!</h1>
+    <p>Created by a Student using Skill + AI ✨</p>
+    <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact Me</button>
+  </header>
+
+  <section class="features">
+    <div class="card"><h3>💻 Professional Look</h3><p>Modern, glowing, responsive web design using HTML + AI creativity.</p></div>
+    <div class="card"><h3>⚡ Ultra Fast</h3><p>Your site will be ready in just 1–2 days — lightning speed guaranteed.</p></div>
+    <div class="card"><h3>💸 ₹500 Only</h3><p>High-end design at a student-friendly price.</p></div>
+    <div class="card"><h3>🤖 AI Enhanced</h3><p>Powered by smart AI and creativity — futuristic & unique.</p></div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact Me 💬</h2>
+    <p>Interested in getting your own stunning website?</p>
+    <p>📞 <b>Anytime Available</b> — I respond fast on WhatsApp or Email!</p>
+    <p>📱 <b>WhatsApp:</b> <a href="https://wa.me/91XXXXXXXXXX" target="_blank">+91 7358489229</a></p>
+    <p>📧 <b>Email:</b> <a href="mailto:youremail@example.com">sidhusree937@gmail.com</a></p>
+    
+    <div class="payment-box">
+      <h3>💰 Payment & Process</h3>
+      <p>1️⃣ Contact me → 2️⃣ Share your idea → 3️⃣ Pay ₹500 → 4️⃣ Get your website in 1–2 days!</p>
+      <p>UPI: <b>yourupi@bank</b></p>
+      <p>💬 After payment, send screenshot on WhatsApp for confirmation!</p>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Student Web Developer — Made by the Student S Yogeshwaran
+  </footer>
+
+  <script>
+    // === Floating Neon Particle Script ===
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+
+    const particles = [];
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * innerWidth;
+        this.y = Math.random() * innerHeight;
+        this.size = Math.random() * 3;
+        this.speedX = (Math.random() - 0.5) * 0.8;
+        this.speedY = (Math.random() - 0.5) * 0.8;
+        this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > innerWidth) this.speedX *= -1;
+        if (this.y < 0 || this.y > innerHeight) this.speedY *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = this.color;
+        ctx.fill();
+      }
+    }
+
+    function init() {
+      for (let i = 0; i < 80; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+  </script>
+</body>
+</html>
